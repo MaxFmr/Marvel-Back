@@ -1,17 +1,21 @@
 const express = require("express");
 const axios = require("axios");
+const cors = require("cors");
+
+require("dotenv").config();
 
 const app = express();
+app.use(cors());
+const apiKey = process.env.API_KEY;
 
 //route personnages avec requête axios vers api (page d'accueil du front)
 app.get("/characters", async (req, res) => {
   try {
     axios
       .get(
-        "https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=EeXJWoEelJUypNAG"
+        `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${process.env.API_KEY}`
       )
       .then((response) => {
-        console.log(response.data); // Affichera la réponse du serveur
         res.send(response.data);
       });
   } catch (error) {
@@ -25,7 +29,7 @@ app.get("/comics", async (req, res) => {
   try {
     axios
       .get(
-        "https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=EeXJWoEelJUypNAG"
+        `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${apiKey}`
       )
       .then((response) => {
         console.log(response.data); // Affichera la réponse du serveur
@@ -42,7 +46,7 @@ app.get("/comics/:_id", async (req, res) => {
     console.log(req.params);
     axios
       .get(
-        `https://lereacteur-marvel-api.herokuapp.com/comics/${req.params._id}?apiKey=EeXJWoEelJUypNAG`
+        `https://lereacteur-marvel-api.herokuapp.com/comics/${req.params._id}?apiKey=${apiKey}`
       )
       .then((response) => {
         console.log(response.data); // Affichera la réponse du serveur
@@ -56,5 +60,5 @@ app.get("/comics/:_id", async (req, res) => {
 //------------------------------
 
 app.listen(3000, () => {
-  console.log("Server has started");
+  console.log("Marvel server has started");
 });
