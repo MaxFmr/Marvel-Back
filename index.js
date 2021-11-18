@@ -13,10 +13,11 @@ app.get("/characters", async (req, res) => {
   try {
     axios
       .get(
-        `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${process.env.API_KEY}`
+        `https://lereacteur-marvel-api.herokuapp.com/characters?name=${req.query.name}&apiKey=${process.env.API_KEY}`
       )
       .then((response) => {
         res.send(response.data);
+        console.log(req.params.skip);
       });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -29,7 +30,7 @@ app.get("/comics", async (req, res) => {
   try {
     axios
       .get(
-        `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${apiKey}`
+        `https://lereacteur-marvel-api.herokuapp.com/comics?title=${req.query.title}&apiKey=${apiKey}`
       )
       .then((response) => {
         console.log(response.data); // Affichera la réponse du serveur
