@@ -1,2 +1,6 @@
 .env
-nodes_modules
+nodes_modules/
+
+# IntelliJ files
+*.iml
+.idea/
