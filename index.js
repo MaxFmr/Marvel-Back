@@ -11,7 +11,7 @@ const apiKey = process.env.API_KEY;
 //route personnages avec requête axios vers api (page d'accueil du front)
 app.get("/characters", async (req, res) => {
   try {
-    axios
+    await axios
       .get(
         `https://lereacteur-marvel-api.herokuapp.com/characters?skip=${req.query.skip}&name=${req.query.name}&apiKey=${process.env.API_KEY}`
       )
@@ -27,7 +27,7 @@ app.get("/characters", async (req, res) => {
 
 app.get("/comics", async (req, res) => {
   try {
-    axios
+    await axios
       .get(
         `https://lereacteur-marvel-api.herokuapp.com/comics?title=${req.query.title}&apiKey=${apiKey}&skip=${req.query.skip}`
       )
@@ -43,7 +43,7 @@ app.get("/comics", async (req, res) => {
 app.get("/comics/:_id", async (req, res) => {
   try {
     console.log(req.params);
-    axios
+    await axios
       .get(
         `https://lereacteur-marvel-api.herokuapp.com/comics/${req.params._id}?apiKey=${apiKey}`
       )
@@ -55,6 +55,9 @@ app.get("/comics/:_id", async (req, res) => {
   }
 });
 
+app.get("/", (req, res) => {
+  res.json({ message: "Hello from marvel backend by Max" });
+});
 //------------------------------
 
 app.listen(3000, () => {
