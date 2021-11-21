@@ -55,6 +55,9 @@ app.get("/comics/:_id", async (req, res) => {
   }
 });
 
+app.get("*", (req, res) => {
+  res.json({ message: "Hello from marvel backend by Max" });
+});
 //------------------------------
 
 app.listen(3000, () => {
